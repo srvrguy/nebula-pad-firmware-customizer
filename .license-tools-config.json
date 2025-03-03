@@ -1,0 +1,14 @@
+{
+  "author": {
+    "from_git": true
+  },
+  "license": "BSD-2-Clause",
+  "include": [
+    "**/*.py"
+  ],
+  "exclude": [
+    "^\\.[^/]+",
+    "/\\.[^/]+",
+    "^assets/.*$"
+  ]
+}

@@ -1,0 +1,35 @@
+[project]
+name = "nebula-firmware-customizer"
+version = "0.1.0"
+description = "A tool to customize firmware for the Creality Nebula Pad"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alive-progress>=3.2.0",
+    "click>=8.1.8",
+    "lxml>=5.3.1",
+    "passlib>=1.7.4",
+    "py7zr>=0.22.0",
+    "requests>=2.32.3",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.1.0",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = [
+    "UP", #pyupgrade
+    "N", #pep8-naming
+    "E", #pycodestyle errors
+    "W", #pycodestyle warnings
+    "C90", #mccabe - McCabe Complexity
+    "D", #pydocstyle
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
