@@ -19,7 +19,7 @@ class OtaTools:
     def parse_ota_update_in(ota_file_location: Path) -> dict[dict[str, str]]:
         """Parse an existing 'ota_update.in' file into a nested dict."""
         # The ota_update.in file format is documented at
-        # http://docs.ingenic.com.cn/platforms/ad100/01Linux开发平台/02方案应用/10双系统OTA升级/#42-编译-ota-升级包固件
+        # http://docs.ingenic.com.cn/platforms/darwin/01LINUX开发平台/05AdvancedModule/009OTA升级/001双系统OTA升级/#2-编译-ota-升级包固件
         # which is only available in Chinese.
         #
         # The format of the ota_update.in file is pseudo-ini and each section is separated by a blank line.
