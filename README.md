@@ -14,7 +14,10 @@ the [custom firmware script created by Jason Pell](https://github.com/pellcorp/c
 
 ## Prerequisites
 
-Because this tool modifies a Linux filesystem, it _must_ be run on a Linux-style system to properly preserve the
+You can use the development container in this project to run the script. It contains all the needed prerequisites for
+the tool to function. If you choose to use it, you don't need to read further in this section.
+
+If you want to run the tool locally,  it _must_ be run on a Linux-style system to properly preserve the
 permissions of the files it is editing. It should work fine on Linux, macOS, or using WSL.
 
 This tool also requires the system to have [squashfs-tools](https://github.com/plougher/squashfs-tools) installed for
