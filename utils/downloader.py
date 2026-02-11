@@ -1,6 +1,6 @@
 # downloader.py
 #
-# Copyright (c) 2025 Michael Johnson
+# Copyright (c) 2025 - 2026 Michael Johnson
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-2-Clause
@@ -30,7 +30,7 @@ class Downloader:
         """
         try:
             # Parse download page to get link
-            url = "https://www.creality.com/pages/download-creality-nebula-smart-kit"
+            url = "https://www.crealitycloud.com/downloads/other/type-24"
 
             response = requests.get(url)
         except requests.exceptions.RequestException as e:
@@ -38,15 +38,25 @@ class Downloader:
 
         tree = html.fromstring(response.content)
 
-        # Test by extracting 1.1.0.27
-        refs = tree.xpath(f"//a[contains(@href, 'NEBULA_ota') and contains(@href, '{version}')]")
+        # Try to extract the JS script text that contains the selected version and part of the firmware filename
+        refs = tree.xpath(f"//script[contains(text(), 'NEBULA_ota') and contains(text(), '{version}')]")
 
         if len(refs) == 1:
-            firmware_url = refs[0].get("href")
-        else:
-            raise RuntimeError(f"Could not find a download link for version {version}")
+            # This is messy because we're doing brute-force parsing of obfuscated/minimized JS
 
-        return firmware_url
+            try:
+                # Grab the data at the end of the JS
+                search_results = re.search(r".*?\((null.*)\)", refs[0].text)
+                results = [item.replace('"', "") for item in search_results.group(1).split(",")]
+
+                urls = [x for x in results if (x.startswith("http") and version in x)]
+
+                if len(urls) == 1:
+                    return urls[0].encode("UTF-8").decode("unicode-escape")
+            except AttributeError:
+                pass
+
+        raise RuntimeError(f"Could not find a download link for version {version}")
 
     @staticmethod
     def __download_firmware(url: str, output_dir: Path) -> None:
