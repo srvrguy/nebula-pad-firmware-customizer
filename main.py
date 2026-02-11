@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # main.py
 #
-# Copyright (c) 2025 Michael Johnson
+# Copyright (c) 2025 - 2026 Michael Johnson
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-2-Clause
@@ -269,8 +269,8 @@ def __gen_firmware_password(board_name: str) -> str:
 @click.option("--root-password", default="creality", help="Password to use for the root user. Defaults to 'creality'")
 @click.option(
     "--source-version",
-    default="1.1.0.27",
-    help="The source version of the firmware to use. Default is '1.1.0.27'",
+    default="1.1.0.30",
+    help="The source version of the firmware to use. Default is '1.1.0.30'",
     callback=validate_version,
 )
 @click.option(
